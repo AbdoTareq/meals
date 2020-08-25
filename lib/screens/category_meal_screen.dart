@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:meals/models/dummy_data.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/meal_item.dart';
 
@@ -31,16 +30,8 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
       _displayedMeals = widget.filteredMeals
           .where((meal) => meal.categories.contains(categoryId))
           .toList();
-      print(
-          'dart_mess ${widget.filteredMeals.where((meal) => meal.categories.contains(categoryId)).toList()}');
       _initialized = true;
     }
-  }
-
-  _removeItem(String id) {
-    setState(() {
-      _displayedMeals.removeWhere((element) => element.id == id);
-    });
   }
 
   @override
@@ -51,10 +42,7 @@ class _CategoryMealScreenState extends State<CategoryMealScreen> {
       ),
       body: ListView.builder(
         itemCount: _displayedMeals.length,
-        itemBuilder: (context, index) => MealItem(
-          meal: _displayedMeals[index],
-          removeItem: _removeItem,
-        ),
+        itemBuilder: (context, index) => MealItem(meal: _displayedMeals[index]),
       ),
     );
   }
